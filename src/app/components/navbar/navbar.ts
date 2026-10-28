@@ -11,5 +11,8 @@ interface ItemNavbar {
   templateUrl: './navbar.html',
 })
 export class Navbar {
-  protected readonly itensNavbar: ItemNavbar[] = [{ titulo: 'Inicio', url: '#' }];
+  protected readonly itensNavbar: ItemNavbar[] = [
+    { titulo: 'Inicio', url: '#' },
+    //
+  ];
 }

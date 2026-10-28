@@ -13,9 +13,11 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav ms-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Home</a>
-      </li>
+      @for (item of itensNavbar; track item.titulo) {
+        <li class="nav-item">
+          <a class="nav-link" [href]="item.url">{{ item.titulo }}</a>
+        </li>
+      }
     </ul>
   </div>
 </nav>
