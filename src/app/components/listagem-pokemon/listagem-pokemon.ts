@@ -12,7 +12,7 @@ export class ListagemPokemon {
   private readonly apiUrl = 'https://pokeapi.co/api/v2/ability/35/';
 
   constructor() {
-    this.http.get(this.apiUrl);
+    const responsta = this.http.get(this.apiUrl);
   }
 }
 
