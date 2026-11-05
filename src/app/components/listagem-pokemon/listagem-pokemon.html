@@ -1,9 +1,9 @@
 <div class="container my-3">
   <div class="row g-3">
-    @for (obj of ObjetoResposta()?.results; track obj.name) {
+    @for (obj of ObjetoResposta(); track obj) {
       <div class="col-md-6 col-lg-2">
         <div class="card">
-          <span class="card-title">{{ obj.name }}</span>
+          <span class="card-title">{{ obj }}</span>
         </div>
       </div>
     }
