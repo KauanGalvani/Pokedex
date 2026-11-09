@@ -39,3 +39,4 @@ export class ListagemPokemon {
 }
 
 //acesso a apis externas
+//minuto 22
