@@ -66,6 +66,10 @@ export class ListagemPokemon {
       initialValue: null,
     },
   );
+
+  protected paraTitleCase(texto: string): string {
+    return texto.toLowerCase().replace(/\b\w/g, (l) => l.toUpperCase());
+  }
 }
 
 //acesso a apis externas
