@@ -1,12 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { Navbar } from './components/navbar/navbar';
-import { ListagemPokemon } from './components/listagem-pokemon/listagem-pokemon';
+import { ListagemPokemon } from './Pokemon/listagem/listagem-pokemon';
 
 @Component({
   imports: [Navbar, ListagemPokemon],
   selector: 'app-root',
   templateUrl: './app.html',
 })
-export class App {
-  protected readonly title = signal('Pokedex');
-}
+export class App {}
