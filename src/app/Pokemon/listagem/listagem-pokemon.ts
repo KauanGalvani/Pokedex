@@ -3,9 +3,32 @@ import { toSignal } from '@angular/core/rxjs-interop'; // usamos o switcmap quan
 import { PokemonService } from '../data/pokemon.service';
 import { Pokemon } from '../pokemon.model';
 
+interface PokemonTypeModel {
+  readonly name: string;
+  readonly desplayName: string;
+}
+
+interface PokemonCardViewModel {
+  readonly id: number;
+  readonly desplayName: string;
+  readonly imageUrl: string | null;
+  readonly imageAlt: string;
+  readonly type: readonly PokemonTypeModel[];
+}
+
 export function paraTitleCase(texto: string): string {
   // este regex (/\b\w/g) vatte o texto procurando a primeira letra de cada palavra
   return texto.toLowerCase().replace(/\b\w/g, (l) => l.toUpperCase());
+}
+
+function paraCardViewModel(dto: Pokemon): PokemonCardViewModel {
+  return {
+    id: 0,
+    desplayName: '',
+    imageUrl: null,
+    imageAlt: '',
+    type: [],
+  };
 }
 
 @Component({
