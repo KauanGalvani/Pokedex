@@ -24,3 +24,4 @@ export class ListagemPokemon {
 }
 
 //acesso a apis externas
+//lembrar de melhorar a estilzação
