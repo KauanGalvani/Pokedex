@@ -2,18 +2,19 @@ import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop'; // usamos o switcmap quando temos uma chamada externa, quando nao temos usamos o map
 import { PokemonService } from '../data/pokemon.service';
 import { Pokemon } from '../pokemon.model';
+import { map } from 'rxjs';
 
 interface PokemonTypeModel {
   readonly name: string;
-  readonly desplayName: string;
+  readonly displayName: string;
 }
 
 interface PokemonCardViewModel {
   readonly id: number;
-  readonly desplayName: string;
+  readonly displayName: string;
   readonly imageUrl: string | null;
   readonly imageAlt: string;
-  readonly type: readonly PokemonTypeModel[];
+  readonly types: readonly PokemonTypeModel[];
 }
 
 export function paraTitleCase(texto: string): string {
@@ -22,12 +23,18 @@ export function paraTitleCase(texto: string): string {
 }
 
 function paraCardViewModel(dto: Pokemon): PokemonCardViewModel {
+  const displayName = paraTitleCase(dto.name);
+  const type: PokemonTypeModel[] = dto.types.map((type) => ({
+    name: type,
+    displayName: paraTitleCase(type),
+  }));
+
   return {
-    id: 0,
-    desplayName: '',
-    imageUrl: null,
-    imageAlt: '',
-    type: [],
+    id: dto.id,
+    displayName: displayName,
+    imageUrl: dto.sprite,
+    imageAlt: 'Image de ${displayName}',
+    types: type,
   };
 }
 
@@ -39,9 +46,11 @@ function paraCardViewModel(dto: Pokemon): PokemonCardViewModel {
 export class ListagemPokemon {
   protected readonly pokemonService = inject(PokemonService);
 
-  protected readonly Pokemon = toSignal(this.pokemonService.listar(), {
-    initialValue: [] as Pokemon[],
-  });
+  protected readonly Pokemon = toSignal(
+    this.pokemonService.listar().pipe(map((pokemon) => pokemon.map(paraCardViewModel))),
+
+    { initialValue: [] as PokemonCardViewModel[] },
+  );
 
   protected readonly paraTitleCase = paraTitleCase;
 }
